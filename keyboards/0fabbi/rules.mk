@@ -60,6 +60,7 @@ OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
 #   USBaspLoader     2048
 OPT_DEFS += -DBOOTLOADER_SIZE=4096
 
+CUSTOM_MATRIX = yes
 
 ifdef ($(FDEBUG))
   CONSOLE_ENABLE					= yes # debug
@@ -69,5 +70,3 @@ EXTRAKEY_ENABLE					= yes # +450 (Consumer Keys (Play, Pause, ...))
 NKRO_ENABLE							= yes
 
 BUETOOTH_ENABLE         = no # for now.. Adafruit EZ-Key HID
-
-LAYOUTS = flayout

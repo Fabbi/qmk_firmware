@@ -48,17 +48,15 @@ void matrix_init_kb(void)
 {
   dprint("matrix_init_kb\n");
 
+  debug_enable = true;
 
   fabbi_lcd_init();
   fabbi_expander_init();
-  matrix_init_user();
 }
 
-void fabbi_led_init(void)
- {
-   DDRD |= (1<<6);
-   // GLED_CONFIG;
-   // RLED_CONFIG;
+void matrix_scan_kb(void)
+{
+
 }
 
 void fabbi_expander_init(void)

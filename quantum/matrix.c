@@ -329,9 +329,7 @@ static void unselect_row(uint8_t row)
 static void unselect_rows(void)
 {
     for(uint8_t x = 0; x < MATRIX_ROWS; x++) {
-        uint8_t pin = row_pins[x];
-        _SFR_IO8((pin >> 4) + 1) &= ~_BV(pin & 0xF); // IN
-        _SFR_IO8((pin >> 4) + 2) |=  _BV(pin & 0xF); // HI
+        unselect_row(x);
     }
 }
 
@@ -403,9 +401,7 @@ static void unselect_col(uint8_t col)
 static void unselect_cols(void)
 {
     for(uint8_t x = 0; x < MATRIX_COLS; x++) {
-        uint8_t pin = col_pins[x];
-        _SFR_IO8((pin >> 4) + 1) &= ~_BV(pin & 0xF); // IN
-        _SFR_IO8((pin >> 4) + 2) |=  _BV(pin & 0xF); // HI
+      unselect_col(x);
     }
 }
 
