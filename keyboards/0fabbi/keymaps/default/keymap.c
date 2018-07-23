@@ -44,6 +44,10 @@ LAYER_PRETTY(
   )
 };
 
+void matrix_init_user(void)
+{
+  dprint("init_user");
+}
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // if (!record->event.pressed) {
   // num++;

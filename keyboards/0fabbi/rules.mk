@@ -62,7 +62,7 @@ OPT_DEFS += -DBOOTLOADER_SIZE=4096
 
 CUSTOM_MATRIX = yes
 
-ifdef ($(FDEBUG))
+ifdef FDEBUG
   CONSOLE_ENABLE					= yes # debug
 endif
 

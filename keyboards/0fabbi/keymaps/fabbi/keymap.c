@@ -43,13 +43,42 @@ LAYER_PRETTY(
   )
 };
 
+void matrix_init_user(void)
+{
+}
+
+uint32_t last_shift = 0;
+bool caps_down = false;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // dprintf("rep: %d\n", record->tap.count);
   // if (!record->event.pressed) {
   // num++;
   // }
   // LED_TOGGLE;
   // matrix_print();
+  if (keycode == KC_LSHIFT) {
+    if (!record->event.pressed) {
+      uint32_t timer_now = timer_read32();
+      if (TIMER_DIFF_32(timer_now, last_shift)<300) {
+        register_code(KC_CAPS);
+        wait_ms(50);
+        unregister_code(KC_CAPS);
+        caps_down = !caps_down;
+        return true;
+      }
+      last_shift = timer_now;
+    }
+  } else {
+    last_shift = 0;
+  }
+
   switch (keycode) {
+  case KC_ESC:
+    if (caps_down) {
+      SEND_STRING(SS_TAP(X_CAPSLOCK));
+      caps_down = false;
+    }
+    break;
   case MACRO11:
     // dprintf("FREE RAM: %d\n", getFreeSram());
     break;

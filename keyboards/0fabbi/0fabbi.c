@@ -52,11 +52,12 @@ void matrix_init_kb(void)
 
   fabbi_lcd_init();
   fabbi_expander_init();
+  matrix_init_user();
 }
 
 void matrix_scan_kb(void)
 {
-
+  matrix_scan_user();
 }
 
 void fabbi_expander_init(void)
