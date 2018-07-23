@@ -47,6 +47,8 @@ void matrix_init_user(void)
 {
 }
 
+#define IS_MOD_PRESSED(mod) ((bool)(get_mods() & MOD_BIT(mod)))
+
 uint32_t last_shift = 0;
 bool caps_down = false;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -61,7 +63,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       uint32_t timer_now = timer_read32();
       if (TIMER_DIFF_32(timer_now, last_shift)<300) {
         register_code(KC_CAPS);
-        wait_ms(50);
+        wait_ms(100);
         unregister_code(KC_CAPS);
         caps_down = !caps_down;
         return true;
@@ -73,6 +75,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
+    // SPC + LSHIFT = BSPC
+  case KC_SPC:
+    if (IS_MOD_PRESSED(KC_LSHIFT)) {
+      if (IS_PRESSED(record->event)) {
+        SEND_STRING(SS_DOWN(X_BSPACE));
+      } else {
+        SEND_STRING(SS_UP(X_BSPACE));
+      }
+      return false;
+    }
   case KC_ESC:
     if (caps_down) {
       SEND_STRING(SS_TAP(X_CAPSLOCK));
@@ -103,3 +115,4 @@ void iota_gfx_task_user(void)
   // old_num = num;
   // }
 }
+#undef IS_MOD_PRESSED
