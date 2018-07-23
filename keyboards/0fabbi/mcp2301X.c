@@ -77,6 +77,12 @@ void expander_unselect_rows(void)
   _delay_us(TGPVO); /* tGPOV 500ns */
 }
 
+void expander_unselect_row(uint8_t row)
+{
+  expander_write(EXPANDER_REG_IODIRA, (1<<row));
+  _delay_us(TGPVO); /* tGPOV 500ns */
+}
+
 void expander_select_row(uint8_t row)
 {
   expander_write(EXPANDER_REG_IODIRA, ~(1<<row));
