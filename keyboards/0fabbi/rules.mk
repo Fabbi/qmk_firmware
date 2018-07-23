@@ -1,10 +1,17 @@
-SRC = \
-		twimaster.c\
-		matrix.c\
-		expander.c\
+FDEBUG = yes
 
-SRC += \
-		ssd1306.c\
+##################
+
+ifeq ($(strip $$(CURRENT_KM)), fabbi)
+  -include fabbi.mk # include if exists...
+endif
+ifeq ($(strip $$(CURRENT_KM)), alex)
+  -include alex.mk # include if exists...
+endif
+
+SRC += $(TOP_DIR)/drivers/avr/i2c_master.c
+SRC += mcp2301X.c
+SRC += matrix.c
 
 # MCU name
 MCU = atmega32u4
@@ -53,30 +60,14 @@ OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
 #   USBaspLoader     2048
 OPT_DEFS += -DBOOTLOADER_SIZE=4096
 
-# Build Options
-#   comment out to disable the options.
-#
-CUSTOM_MATRIX						= yes
-UNICODE_ENABLE					= no # inspect..
-BOOTMAGIC_ENABLE				= no
-MOUSEKEY_ENABLE					= yes # for now.. +4700
-EXTRAKEY_ENABLE					= yes # +450
-CONSOLE_ENABLE					= yes
-COMMAND_ENABLE					= no
-SLEEP_LED_ENABLE				= no
+
+ifdef ($(FDEBUG))
+  CONSOLE_ENABLE					= yes # debug
+endif
+
+EXTRAKEY_ENABLE					= yes # +450 (Consumer Keys (Play, Pause, ...))
 NKRO_ENABLE							= yes
-USB_6KRO_ENABLE					= no
-BACKLIGHT_ENABLE        = no	# Enable keyboard backlight functionality
-KEYMAP_IN_EEPROM_ENABLE = no 	# External keymap in eeprom
-KEYMAP_SECTION_ENABLE   = no	# Fixed address keymap for keymap editor
-SOFTPWM_LED_ENABLE      = no  # Enable SoftPWM to drive backlight
-FADING_LED_ENABLE       = no  # Enable fading backlight
-BREATHING_LED_ENABLE    = no  # Enable breathing backlight
-LEDMAP_ENABLE           = no	# Enable LED mapping
-LEDMAP_IN_EEPROM_ENABLE = no  # Read LED mapping from eeprom
-SWAP_HANDS_ENABLE       = no  # Disable Onehand
-RGBLIGHT_ENABLE         = no
-MIDI_ENABLE             = no
-BUETOOTH_ENABLE = no # for now.. Adafruit EZ-Key HID
+
+BUETOOTH_ENABLE         = no # for now.. Adafruit EZ-Key HID
 
 LAYOUTS = flayout
