@@ -9,7 +9,7 @@
 #include "matrix.h"
 #include "0fabbi.h"
 #include "i2cmaster.h"
-#include "expander.h"
+#include "mcp2301X.h"
 #ifdef DEBUG_MATRIX_SCAN_RATE
 #include  "timer.h"
 #endif
@@ -26,7 +26,7 @@
  *
  * And so, there is no sense to have DEBOUNCE higher than 2.
  */
-
+#define DEBOUNCE 1
 #ifndef DEBOUNCE
 #   define DEBOUNCE	5
 #endif
@@ -173,7 +173,7 @@ uint8_t matrix_scan(void)
     print("matrix scan frequency: ");
     pdec(matrix_scan_count);
     print("\n");
-    matrix_print();
+    // matrix_print();
 
     matrix_timer = timer_now;
     matrix_scan_count = 0;

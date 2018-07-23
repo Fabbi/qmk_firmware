@@ -1,8 +1,9 @@
 #include <stdbool.h>
 #include <util/delay.h>
 #include "action.h"
-#include "i2cmaster.h"
-#include "expander.h"
+#include "i2c_master.h"
+#include "mcp2301X.h"
+#include "print.h"
 #include "debug.h"
 
 static uint8_t expander_status = 0;
@@ -115,11 +116,11 @@ uint8_t expander_read(uint8_t reg, uint8_t *data)
   if (ret) goto stop;
   ret = i2c_write(reg);
   if (ret) goto stop;
-  ret = i2c_rep_start(EXPANDER_ADDR | I2C_READ);
+  ret = i2c_start(EXPANDER_ADDR | I2C_READ);
   if (ret) goto stop;
 
   _delay_us(TGPIV); /* tGPIV 450ns Table 2-2 page 36*/
-  *data = i2c_readNak();
+  *data = i2c_read_nack();
  stop:
   i2c_stop();
   return ret;

@@ -12,16 +12,11 @@ extern unsigned int __bss_end;
 extern unsigned int __heap_start;
 extern void *__brkval;
 extern uint16_t getFreeSram(void);
+//extern uint16_t num;
 
 void init_fabbi(void);
 void fabbi_lcd_init(void);
 void fabbi_expander_init(void);
-
-// inline void fabbi_led_off(void) { DDRD &= ~(1<<6); PORTD &= ~(1<<6); }
-// inline void fabbi_led_on(void) { DDRD |= (1<<6); PORTD |= (1<<6); }
-inline void fabbi_led_off(void) { PORTD &= ~(1<<6); }
-inline void fabbi_led_on(void) { PORTD |= (1<<6); }
-
 
 #define LAYER_PRETTY(k00,k01,k02,k03,k04,k05,k06,k07,k08,k09,k0A,k0B,k0C,k0D,  \
               k10,k11,k12,k13,k14,k15,k16,k17,k18,k19,k1A,k1B,k1C,k1D,  \

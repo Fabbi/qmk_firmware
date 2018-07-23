@@ -3,9 +3,9 @@
 #include <print.h>
 #include <util/delay.h>
 
-#include "i2cmaster.h"
+#include "i2c_master.h"
 #include "ssd1306.h"
-#include "expander.h"
+#include "mcp2301X.h"
 
 // matrix_setup();
 //
@@ -44,12 +44,6 @@ uint16_t getFreeSram(void) {
     return (((uint16_t)&newVariable) - ((uint16_t)__brkval));
 };
 
-extern inline void fabbi_led_on(void);
-
-extern inline void fabbi_led_off(void);
-
-void fabbi_led_init(void);
-
 void matrix_init_kb(void)
 {
   dprint("matrix_init_kb\n");
@@ -73,23 +67,14 @@ void fabbi_expander_init(void)
   expander_init();
 #endif
 }
+
 static const uint8_t PROGMEM fabbiLogo[] = {FLOGO};
 void fabbi_lcd_init(void)
 {
-  for (uint16_t i = 0; i < SSD1306_BUFFERSIZE; ++i) {
-    display.lcd_buffer[i] = 0;
-  }
-  dprint("LCD INIT\n");
-  bool success = iota_gfx_init(false);
+  bool success = iota_gfx_init();
   if (success) {
     LED_ON;
     dprint("FOUND DISPLAY\n");
-
-    display.lcd_buffer[10] = 255;
-    display.lcd_buffer[1] = 255;
-    // for (int i = 0; i < 10; i++)
-    //   display.lcd_buffer[5*DisplayWidth + i] = 5;
-      // iota_gfx_write_char('m');
     if (iota_gfx_on()) {
       dprint("GFX ON\n");
       iota_gfx_flush();
