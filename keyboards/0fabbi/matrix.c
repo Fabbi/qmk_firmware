@@ -11,10 +11,8 @@
 #include "timer.h"
 #include "i2cmaster.h"
 #include "mcp2301X.h"
-#ifdef DEBUG_MATRIX_SCAN_RATE
-#include  "timer.h"
-#endif
 
+// #define DEBUG_MATRIX_SCAN_RATE
 
 /* Set 0 if debouncing isn't needed */
 
