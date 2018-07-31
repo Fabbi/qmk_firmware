@@ -139,6 +139,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   //   break;
 
   case KC_ESC:
+    // clear the layers..
+    layer_clear();
+
+    // clear caps lock if active
     if (caps_down) {
       SEND_STRING(SS_TAP(X_CAPSLOCK));
       caps_down = false;
