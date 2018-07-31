@@ -97,7 +97,7 @@ void matrix_init_user(void)
 
 uint32_t last_shift = 0;
 bool caps_down = false;
-bool spc_shft = false;
+// bool spc_shft = false;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // dprintf("rep: %d\n", record->tap.count);
   // if (!record->event.pressed) {
@@ -123,20 +123,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   switch (keycode) {
     // SPC + LSHIFT = BSPC
-  case KC_SPC:
-    if (IS_MOD_PRESSED(KC_LSHIFT)) {
-      if (IS_PRESSED(record->event)) {
-        spc_shft = true;
-        SEND_STRING(SS_DOWN(X_BSPACE));
-        return false;
-      }
-    }
-    if (spc_shft) {
-    spc_shft = false;
-      SEND_STRING(SS_UP(X_BSPACE));
-      return false;
-    }
-    break;
+  // case KC_SPC:
+  //   if (IS_MOD_PRESSED(KC_LSHIFT)) {
+  //     if (IS_PRESSED(record->event)) {
+  //       spc_shft = true;
+  //       SEND_STRING(SS_DOWN(X_BSPACE));
+  //       return false;
+  //     }
+  //   }
+  //   if (spc_shft) {
+  //   spc_shft = false;
+  //     SEND_STRING(SS_UP(X_BSPACE));
+  //     return false;
+  //   }
+  //   break;
 
   case KC_ESC:
     if (caps_down) {
