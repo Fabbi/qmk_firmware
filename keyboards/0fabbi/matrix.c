@@ -9,7 +9,7 @@
 #include "util.h"
 #include "matrix.h"
 #include "timer.h"
-#include "i2cmaster.h"
+#include "i2c_master.h"
 #include "mcp2301X.h"
 
 // #define DEBUG_MATRIX_SCAN_RATE
