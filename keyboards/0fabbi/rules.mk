@@ -1,4 +1,5 @@
 FDEBUG = yes
+# OPT_DEFS += -DDEBUG_MATRIX_SCAN_RATE
 
 ##################
 
@@ -12,6 +13,8 @@ endif
 SRC += $(TOP_DIR)/drivers/avr/i2c_master.c
 SRC += mcp2301X.c
 SRC += matrix.c
+
+# EXTRALDFLAGS += -Wl,-u,vfprintf
 
 # MCU name
 MCU = atmega32u4
