@@ -26,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] =
 LAYER(
   // left side
-  KC_GRAVE, KC_TAB,   KC_Q, KC_W, KC_E,    KC_R,    KC_T,
+  ______,   KC_TAB,   KC_Q, KC_W, KC_E,    KC_R,    KC_T,
   MACRO12,  KC_ESC,   KC_A, KC_S, KC_D,    KC_F,    KC_G,
   KC_APP,   KC_GRAVE, KC_Z, KC_X, KC_C,    KC_V,    KC_B,
   ,         ,         ,     ,     KC_LALT, KC_LGUI, KC_LSHIFT, KC_LCTL, TT(CONTROL),
@@ -61,7 +61,7 @@ LAYER(
   ______, ______, KC_F1,  KC_F2,  KC_F3,   KC_F4,   KC_F5,
   ______, ______, ______, ______, ______,  ______,  ______,
   ______, ______, ______, ______, KC_MUTE, KC_VOLD, KC_VOLU,
-  ,       ,       ,       ,       ______,  ______,  KC_BSPC, ______, ______,
+  ,       ,       ,       ,       ______,  ______,  ______, ______, ______,
 
 
   // right side
@@ -122,6 +122,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
+  // case SHFTNUM:
+
+  //   break;
     // SPC + LSHIFT = BSPC
   // case KC_SPC:
   //   if (IS_MOD_PRESSED(KC_LSHIFT)) {
