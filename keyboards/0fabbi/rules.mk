@@ -3,12 +3,10 @@ FDEBUG = yes
 
 ##################
 
-ifeq ($(strip $$(CURRENT_KM)), fabbi)
-  -include fabbi.mk # include if exists...
-endif
-ifeq ($(strip $$(CURRENT_KM)), alex)
-  -include alex.mk # include if exists...
-endif
+USER_INCLUDE = $(if $(RULE),$(RULE),$(KEYMAP))
+USER_KEYBOARD = $(if $(CURRENT_KB),$(CURRENT_KB),$(KEYBOARD))
+
+-include keyboards/$(USER_KEYBOARD)/$(USER_INCLUDE).mk
 
 SRC += $(TOP_DIR)/drivers/avr/i2c_master.c
 SRC += mcp2301X.c
