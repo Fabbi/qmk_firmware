@@ -23,6 +23,7 @@
 static uint16_t debouncing_time;
 static bool debouncing = false;
 #endif
+
 #ifdef DEBUG_MATRIX_SCAN_RATE
 uint32_t matrix_timer;
 uint32_t matrix_scan_count;

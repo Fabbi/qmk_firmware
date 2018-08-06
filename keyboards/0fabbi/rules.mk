@@ -1,6 +1,3 @@
-FDEBUG = yes
-# OPT_DEFS += -DDEBUG_MATRIX_SCAN_RATE
-
 ##################
 
 USER_INCLUDE = $(if $(RULE),$(RULE),$(KEYMAP))
@@ -8,8 +5,12 @@ USER_KEYBOARD = $(if $(CURRENT_KB),$(CURRENT_KB),$(KEYBOARD))
 
 -include keyboards/$(USER_KEYBOARD)/$(USER_INCLUDE).mk
 
+##################
+
+# for communication with the right half
 SRC += $(TOP_DIR)/drivers/avr/i2c_master.c
 SRC += mcp2301X.c
+# for own scan code because we have a split keyboard.. (this should be part of QMK..)
 SRC += matrix.c
 
 # EXTRALDFLAGS += -Wl,-u,vfprintf

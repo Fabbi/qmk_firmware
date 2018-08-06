@@ -1,3 +1,6 @@
+FDEBUG = yes # Master of debug
+# OPT_DEFS += -DDEBUG_MATRIX_SCAN_RATE
+
 # # Display stuff..
 # OPT_DEFS += -DSSD1306OLED
 
@@ -6,6 +9,9 @@
 
 # SRC += $(TOP_DIR)/drivers/avr/ssd1306.c
 
+# Trackpoint
 # PS2_MOUSE_ENABLE        = yes
 # PS2_USE_USART           = yes
-BOOTMAGIC_ENABLE				= yes
+
+# bootmagic.. dunno if needed..
+BOOTMAGIC_ENABLE				= no
