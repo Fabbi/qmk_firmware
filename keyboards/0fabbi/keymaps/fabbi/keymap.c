@@ -21,12 +21,12 @@ enum custom_keycodes {
 #define CONTROL 2 // controlling (blue) layer (arrow keys, F-Keys, Consumer Keys..)
 #define HARDWARE 3 // hardware layer
 
-#define ______ KC_TRNS
+#define SHFT_NUM LM(NUMBERS, MOD_LSFT)
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] =
 LAYER(
   // left side
-  ______,   KC_TAB,   KC_Q, KC_W, KC_E,    KC_R,    KC_T,
+  _______,   KC_TAB,   KC_Q, KC_W, KC_E,    KC_R,    KC_T,
   MACRO12,  KC_ESC,   KC_A, KC_S, KC_D,    KC_F,    KC_G,
   KC_APP,   KC_GRAVE, KC_Z, KC_X, KC_C,    KC_V,    KC_B,
   ,         ,         ,     ,     KC_LALT, KC_LGUI, KC_LSHIFT, KC_LCTL, TT(CONTROL),
@@ -36,58 +36,58 @@ LAYER(
   ,        ,            KC_Y,     KC_U,                  KC_I,      KC_O,   KC_P,    KC_LBRC, KC_RBRC,
   ,        ,            KC_H,     KC_J,                  KC_K,      KC_L,   KC_SCLN, KC_QUOT, KC_ENT,
   ,        ,            KC_N,     KC_M,                  KC_COMM,   KC_DOT, KC_SLSH, KC_BSLS, KC_RALT,
-  KC_BSPC, TT(NUMBERS), KC_SPACE, LM(NUMBERS, MOD_LSFT), KC_RGUI
+  KC_BSPC, TT(NUMBERS), KC_SPACE, SHFT_NUM, KC_RGUI
   ),
 
 [NUMBERS] =
 LAYER(
   // left side
-  ______, ______, KC_1,   KC_2,   KC_3,   KC_4,   KC_5,
-  ______, ______, ______, ______, ______, ______, ______,
-  ______, ______, ______, ______, ______, ______, ______,
-  ,       ,       ,       ,       ______, ______, ______, ______,   TT(HARDWARE) ,
+  // _______, _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,
+  _______,    _______, _______, _______, _______, _______, _______,
+  _______,    _______, _______, _______, _______, _______, _______,
+  _______,    _______, _______, _______, _______, _______, _______,
+  ,           ,        ,        ,        _______, _______, _______,  _______,  TT(HARDWARE) ,
 
 
   // right side
-  ,       ,       KC_6,   KC_7, KC_8, KC_9, KC_0,     KC_MINUS, KC_EQL,
-  ,       ,       ______, KC_4, KC_5, KC_6, KC_MINUS, KC_EQL,   ______,
-  ,       ,       ______, KC_1, KC_2, KC_3, ______,   ______,   ______,
-  ______, ______, ______, KC_0, KC_DOT
+  ,           ,        _______, KC_7,    KC_8,    KC_9,    KC_0,     KC_MINUS, KC_EQL,
+  ,           ,        _______, KC_4,    KC_5,    KC_6,    KC_MINUS, KC_EQL,   _______,
+  ,           ,        _______, KC_1,    KC_2,    KC_3,    _______,  _______,  _______,
+  _______,    _______, _______, KC_0,    KC_DOT
   ),
 
 [CONTROL] =
 LAYER(
   // left side
-  ______, ______, KC_F1,  KC_F2,  KC_F3,   KC_F4,   KC_F5,
-  ______, ______, ______, ______, ______,  ______,  ______,
-  ______, ______, ______, ______, KC_MUTE, KC_VOLD, KC_VOLU,
-  ,       ,       ,       ,       ______,  ______,  ______, ______, ______,
+  _______, _______, KC_F1,  KC_F2,  KC_F3,   KC_F4,   KC_F5,
+  _______, _______, _______, _______, _______,  _______,  _______,
+  _______, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU,
+  ,       ,       ,       ,       _______,  _______,  _______, _______, _______,
 
 
   // right side
   ,       ,             KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_F11, KC_F12,
-  ,       ,             KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, ______,  ______, ______,
-  ,       ,             KC_MPRV, KC_MPLY, KC_MNXT, ______,   ______,  ______, ______,
-  ______, TT(HARDWARE), KC_BSPC, ______,  ______
+  ,       ,             KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______,  _______, _______,
+  ,       ,             KC_MPRV, KC_MPLY, KC_MNXT, _______,   _______,  _______, _______,
+  _______, TT(HARDWARE), KC_BSPC, _______,  _______
   ),
 
 [HARDWARE] =
 LAYER(
   // left side
-  ______, ______, ______,  ______, ______, ______, RESET,
-  ______, ______, ______,  ______, ______, ______, ______,
-  ______, ______, ______,  ______, ______, ______, ______,
-  ,       ,       ,        ,       ______, ______, ______, ______, ______,
+  _______, _______, _______,  _______, _______, _______, RESET,
+  _______, _______, _______,  _______, _______, _______, _______,
+  _______, _______, _______,  _______, _______, _______, _______,
+  ,       ,       ,        ,       _______, _______, _______, _______, _______,
 
 
   // right side
-  ,       ,       ______,  ______, ______, ______, ______, ______, ______,
-  ,       ,       ______,  ______, ______, ______, ______, ______, ______,
-  ,       ,       ______,  ______, ______, ______, ______, ______, ______,
-  ______, ______, KC_BSPC, ______, ______
+  ,       ,       _______,  _______, _______, _______, _______, _______, _______,
+  ,       ,       _______,  _______, _______, _______, _______, _______, _______,
+  ,       ,       _______,  _______, _______, _______, _______, _______, _______,
+  _______, _______, KC_BSPC, _______, _______
   )
 };
-#undef _______
 
 void matrix_init_user(void)
 {
