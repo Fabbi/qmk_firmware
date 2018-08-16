@@ -94,19 +94,43 @@ void matrix_init_user(void)
 }
 
 #define IS_MOD_PRESSED(mod) ((bool)(get_mods() & MOD_BIT(mod)))
+#define PRESSED (record->event.pressed)
+#define RELEASED (!PRESSED)
 
 uint32_t last_shift = 0;
 bool caps_down = false;
+bool shift_down = false;
+bool shifted_down = false;
 // bool spc_shft = false;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  // layer key action
+  if (QK_LAYER_MOD & keycode)
+  if (MOD_BIT(keycode) == MOD_BIT(MOD_LSFT)) {
+    // shifted layer action
+    shifted_down = record->event.pressed;
+
+    if (RELEASED && shift_down) {
+      // only deactivate the layer, don't send shift up
+      layer_off(keycode>>4 & 0xF);
+      return false;
+    }
+  }
   // dprintf("rep: %d\n", record->tap.count);
   // if (!record->event.pressed) {
   // num++;
   // }
   // LED_TOGGLE;
   // matrix_print();
-  if (keycode == KC_LSHIFT) {
-    if (!record->event.pressed) {
+
+  if (keycode != KC_LSHIFT)
+    last_shift = 0;
+
+  switch (keycode) {
+
+    // double shift => caps
+  case KC_LSHIFT:
+    shift_down = record->event.pressed;
+    if (RELEASED) {
       uint32_t timer_now = timer_read32();
       if (TIMER_DIFF_32(timer_now, last_shift)<300) {
         register_code(KC_CAPS);
@@ -116,12 +140,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return true;
       }
       last_shift = timer_now;
-    }
-  } else {
-    last_shift = 0;
-  }
-
-  switch (keycode) {
+      // don't send shift up if shft_num is pressed
+      if (shifted_down) return false;
+    } break;
   // case SHFTNUM:
 
   //   break;
