@@ -101,6 +101,7 @@ uint32_t last_shift = 0;
 bool caps_down = false;
 bool shift_down = false;
 bool shifted_down = false;
+bool gui_shift = false;
 // bool spc_shft = false;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // layer key action
@@ -126,6 +127,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     last_shift = 0;
 
   switch (keycode) {
+
+    // lgui + rgui => lgui + rshift
+  case KC_LGUI:
+    if (IS_MOD_PRESSED(KC_RGUI)) {
+      if (PRESSED) {
+        register_code(KC_LSHIFT);
+        gui_shift = true;
+      }else{
+        unregister_code(KC_LSHIFT);
+        gui_shift = false;
+      }
+      return false;
+    } else
+    if (RELEASED && gui_shift) {
+      unregister_code(KC_LSHIFT);
+      unregister_code(KC_RSHIFT);
+    }break;
+
+    // rgui + lgui => rgui + lshift
+  case KC_RGUI:
+    if (IS_MOD_PRESSED(KC_LGUI)) {
+      if (PRESSED) {
+        register_code(KC_RSHIFT);
+        gui_shift = true;
+      }else{
+        unregister_code(KC_RSHIFT);
+        gui_shift = false;
+      }
+      return false;
+    } else
+    if (RELEASED && gui_shift) {
+      unregister_code(KC_LSHIFT);
+      unregister_code(KC_RSHIFT);
+    }break;
 
     // double shift => caps
   case KC_LSHIFT:
